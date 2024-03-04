@@ -3,6 +3,7 @@ import axios from "axios";
 export const axiosInstance = axios.create({});
 
 export const apiConnector = (method, url, bodyData, headers, params) => {
+  console.log("Here is all the final data before sending it to server: ", bodyData);
   return axiosInstance({
     method: `${method}`,
     url: `${url}`,
@@ -15,6 +16,7 @@ export const apiConnector = (method, url, bodyData, headers, params) => {
       return response;
     })
     .catch((error) => {
+      console.log("I am coming here: in apiConnector.js file");
       console.error("API Error:", error);
       throw error; // Rethrow the error to propagate it to the calling function
     });

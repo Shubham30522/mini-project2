@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import axios from "axios";
 import hlogin from "../assets/hlogin1.jpg";
 import dlogin from "../assets/dlogin1.png";
 import { useNavigate } from "react-router-dom";
@@ -42,18 +41,6 @@ const Registration = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    /* try {
-      if (accountType === 'hospital') {
-        await axios.post('http://localhost:5000/api/register/hospital', formData);
-      } else {
-        await axios.post('http://localhost:5000/api/register/donor', formData);
-      }
-
-      // Handle successful registration, e.g., redirect or show a success message
-    } catch (error) {
-      console.error(error);
-      // Handle registration failure, e.g., show an error message
-    } */
   };
 
   const navigate = useNavigate();
@@ -64,25 +51,10 @@ const Registration = () => {
       accountType: accountType,
     };
 
-    console.log("working till here");
-    let {
-      donorName,
-      email,
-      bloodGroup,
-      password,
-      cnfPassword,
-      accountType: userType,
-      gender,
-      dateOfBirth,
-      pincode,
-      address
-    } = updatedFormData;
-    // console.log(updatedFormData);
-    // console.log(donorName, email, bloodGroup, password, cnfPassword, userType, gender, dateOfBirth, pincode, address);
     try{
 
-      const response = await signUp(donorName,email,bloodGroup,password,cnfPassword,userType, gender, dateOfBirth, pincode, address);
-      console.log(response);
+      const response = await signUp(updatedFormData);
+      // console.log(response);
     }
     catch(error) {
       console.log("Error generated while submitting formData to server :", console.error());
