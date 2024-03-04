@@ -4,6 +4,7 @@ import hlogin from "../assets/hlogin1.jpg";
 import dlogin from "../assets/dlogin1.png";
 import { useNavigate } from "react-router-dom";
 import { signUp } from "../services/operations/authAPI";
+import toast from "react-hot-toast";
 
 const Registration = () => {
   const [accountType, setAccountType] = useState("hospital");
@@ -35,9 +36,9 @@ const Registration = () => {
     setAccountType(event.target.value);
   };
 
-  /* const getFormHeight = () => {
+  const getFormHeight = () => {
     return accountType === 'hospital' ? '100px' : '1000px';
-  }; */
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -54,6 +55,8 @@ const Registration = () => {
     try{
 
       const response = await signUp(updatedFormData);
+      toast.success("SignUp Successful");
+      navigate("/Login");
       // console.log(response);
     }
     catch(error) {
