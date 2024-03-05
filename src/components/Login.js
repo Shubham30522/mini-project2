@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import hospitalImage from "../assets/hospital.png";
 import donorImage from "../assets/dlogin1.png"; // Replace with the actual donor image
-import { loginConnector } from "../services/operations/authAPI";
+import { useLoginConnector } from "../services/operations/authAPI"; // Import the useLoginConnector hook
 import toast from "react-hot-toast";
+
 
 const Login = () => {
   const [userType, setUserType] = useState("hospital");
@@ -26,6 +27,8 @@ const Login = () => {
   };
   const navigate = useNavigate();
 
+  const loginConnector = useLoginConnector();
+
   async function loginFormHandler(e) {
     e.preventDefault();
     setFormData({});
@@ -33,8 +36,7 @@ const Login = () => {
       ...formData,
       accountType: userType,
     };
-    console.log(updatedFormData);
-
+    // console.log(updatedFormData);
     try {
       const response = await loginConnector(updatedFormData);
       const success = response.data.success;
