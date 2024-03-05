@@ -16,7 +16,6 @@ export const apiConnector = (method, url, bodyData, headers, params) => {
       return response;
     })
     .catch((error) => {
-      console.log("I am coming here: in apiConnector.js file");
       console.error("API Error:", error);
       throw error; // Rethrow the error to propagate it to the calling function
     });

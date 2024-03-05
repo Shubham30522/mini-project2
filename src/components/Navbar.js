@@ -1,11 +1,15 @@
 import React from 'react'
 import {NavLink}from 'react-router-dom';
 import microscope from '../assets/microscope.png'
+import { useSelector } from "react-redux";
+
 
 
 function Navbar() {
+  const { token } = useSelector((state) => state.auth);
  
   return (
+    
     <div className='j'>
       <div className='bg-red-700 flex flex-row justify-center flex-wrap min-h-12'>
         <div className='w-[1200px] flex justify-between mt-2 text-white flex-wrap'>
