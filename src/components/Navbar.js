@@ -5,19 +5,20 @@ import { useSelector } from "react-redux";
 import { setToken } from "../slices/authSlice";
 import { useDispatch } from "react-redux";
 import toast from "react-hot-toast";
-
+// import profileSlice from "../slices/profileSlice";
 
 function Navbar() {
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
   // console.log(token);
-  
+
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
     toast.success("Successfully logged out");
     dispatch(setToken(null));
-  }
+  };
   return (
     <div className="j">
       <div className="bg-red-700 flex flex-row justify-center flex-wrap min-h-12">
@@ -41,11 +42,15 @@ function Navbar() {
                 Home
               </NavLink>
             </div>
-            <div className="hover:text-green-400">
-              <NavLink className="nav-link" id="About" to="/Add">
-                Add Request
-              </NavLink>
-            </div>
+
+            {token && user.accountType === "hospital" && (
+              <div className="hover:text-green-400">
+                <NavLink className="nav-link" id="About" to="/Add">
+                  Add Request
+                </NavLink>
+              </div>
+            )}
+
             <div className="hover:text-green-400">
               <NavLink className="nav-link" id="About" to="/About">
                 About Us
@@ -98,7 +103,10 @@ function Navbar() {
                     aria-current="page"
                     to="/"
                   >
-                    <button onClick={logoutHandler} className="w-[90px] border-2 border-gray-300 hover:bg-slate-400 rounded-lg hover:text-slate-800 ">
+                    <button
+                      onClick={logoutHandler}
+                      className="w-[90px] border-2 border-gray-300 hover:bg-slate-400 rounded-lg hover:text-slate-800 "
+                    >
                       Logout
                     </button>
                   </NavLink>

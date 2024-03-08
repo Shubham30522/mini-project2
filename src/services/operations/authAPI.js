@@ -1,8 +1,9 @@
 // import { toast } from "react-hot-toast";
 import { apiConnector } from "../apiConnector";
 import { endpoints } from "../apis";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../slices/authSlice";
+import { setUser } from "../../slices/profileSlice";
 
 const { SIGNUP_API, LOGIN_API } = endpoints;
 
@@ -17,20 +18,21 @@ export async function signUp(userSignUpData) {
 
 export function useLoginConnector() {
   const dispatch = useDispatch();
-
+  const { user } = useSelector(state => state.profile);
   const loginConnector = async (userLoginData) => {
     try {
       const response = await apiConnector("POST", LOGIN_API, userLoginData);
-      
+
       dispatch(setToken(response.data.token));
+      dispatch(setUser(response.data.user));
+
+      console.log("after redux step: ", user);
 
       // Log the current state of the Redux store
       // console.log("Redux State after setting token:", dispatch.getState().auth);
 
-
       localStorage.setItem("token", JSON.stringify(response.data.token));
       console.log("Token set in local storage:", response.data.token);
-
 
       return response;
       // console.log("LOGIN API RESPONSE............", response);
