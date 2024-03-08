@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToken } from "../../slices/authSlice";
 import { setUser } from "../../slices/profileSlice";
 
-const { SIGNUP_API, LOGIN_API } = endpoints;
+const { SIGNUP_API, LOGIN_API, CREATE_API } = endpoints;
 
 export async function signUp(userSignUpData) {
   try {
@@ -43,4 +43,14 @@ export function useLoginConnector() {
   };
 
   return loginConnector;
+}
+
+export async function createRequest(requestData) {
+  // console.log("in createRequest:", requestData);
+  try {
+    const response = await apiConnector("POST", CREATE_API, requestData);
+    // console.log(" API RESPONSE............", response);
+  } catch (error) {
+    console.log("CREATE REQUEST API ERROR............", error);
+  }
 }

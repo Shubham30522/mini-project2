@@ -1,14 +1,23 @@
 import React from 'react'
 import { useForm } from "react-hook-form";
+import { createRequest } from '../services/operations/authAPI';
+import { useSelector } from 'react-redux';
+// import authSlice from '../slices/authSlice';
 
 
 function Addrequest() {
 const { register, handleSubmit } = useForm();
 
-const requestSubmitHandler = (requestData) => {
-  console.log(requestData);
+const requestSubmitHandler = async (requestData) => {
+  const updatedRequestData = {
+    ...requestData,
+    token,
+  };
+  console.log(updatedRequestData);
+  const requestResponse = await createRequest(updatedRequestData);
+  console.log((requestResponse ? requestResponse : null));
 }
-
+  const {token} = useSelector(state => state.auth);
   return (
     <div className="relative flex m-auto justify-center items-center">
       <div className="w-[1100px] absolute flex m-auto justify-center items-center ">

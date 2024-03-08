@@ -15,6 +15,7 @@ function Navbar() {
   const dispatch = useDispatch();
 
   const logoutHandler = () => {
+    console.log("after redux step: ", user);
     localStorage.removeItem("token");
     toast.success("Successfully logged out");
     dispatch(setToken(null));
@@ -43,7 +44,7 @@ function Navbar() {
               </NavLink>
             </div>
 
-            {token && user.accountType === "hospital" && (
+            {token !== null && user !== null && user.accountType === "hospital" && (
               <div className="hover:text-green-400">
                 <NavLink className="nav-link" id="About" to="/Add">
                   Add Request

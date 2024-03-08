@@ -148,6 +148,7 @@ const Login = () => {
                   <input
                     name="email"
                     type="text"
+                    autoFocus
                     className={`${
                       userType === "hospital" ? "text-black" : "text-black"
                     } input-field px-2 py-1 rounded-tl-lg rounded-br-xl w-[300px]`}
